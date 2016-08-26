@@ -9,8 +9,23 @@
     android:paddingTop="@dimen/activity_vertical_margin"
     tools:context="andrewpolvoko.htp_android_courses.MainActivity">
 
-    <TextView
+    <Button
+        android:id="@+id/PlayButton"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Hello World!" />
+        android:layout_marginTop="70dp"
+        android:onClick="ToggleAudio"
+        android:text="@string/play"
+        android:layout_below="@+id/seekBar"
+        android:layout_centerHorizontal="true" />
+
+    <SeekBar
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:id="@+id/seekBar"
+        android:clickable="false"
+        android:layout_centerVertical="true"
+        android:layout_centerHorizontal="true" />
+
+
 </RelativeLayout>
