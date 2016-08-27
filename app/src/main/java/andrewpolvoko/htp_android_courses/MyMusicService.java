@@ -3,17 +3,14 @@ package andrewpolvoko.htp_android_courses;
 import android.app.Service;
 import android.content.Intent;
 import android.media.MediaPlayer;
-import android.os.AsyncTask;
 import android.os.Handler;
 import android.os.HandlerThread;
 import android.os.IBinder;
+import android.os.Looper;
 import android.os.Message;
 import android.os.Messenger;
 import android.os.RemoteException;
 import android.support.annotation.Nullable;
-
-import java.util.Timer;
-import java.util.TimerTask;
 
 public class MyMusicService extends Service implements
         MediaPlayer.OnCompletionListener,
@@ -32,9 +29,10 @@ public class MyMusicService extends Service implements
     public void onCreate() {
         mHandlerThread = new HandlerThread(MUSIC_THREAD_NAME, Thread.MAX_PRIORITY);
         mHandlerThread.start();
-        mHandler = new Handler(mHandlerThread.getLooper());
+        mHandler = new MessagesHandler(mHandlerThread.getLooper());
 
         mMediaPlayer = MediaPlayer.create(this, R.raw.one);
+        mMediaPlayer.setOnCompletionListener(this);
 
         /*mMediaPlayer = new MediaPlayer();
         mMediaPlayer.setAudioStreamType(AudioManager.STREAM_MUSIC);
@@ -60,6 +58,14 @@ public class MyMusicService extends Service implements
     }
 
     class MessagesHandler extends Handler {
+        public MessagesHandler(Looper looper) {
+            super(looper);
+        }
+
+        public MessagesHandler() {
+            super();
+        }
+
         @Override
         public void handleMessage(Message msg) {
             switch (msg.what) {
@@ -68,10 +74,18 @@ public class MyMusicService extends Service implements
                     if (mMediaPlayer.isPlaying()) {
                         mMediaPlayer.pause();
                     } else {
-                        sendMessageToActivity(Constants.INIT_SEEK_BAR, mMediaPlayer.getDuration());
+                        sendMessageToActivity(Constants.SET_TRACK_DURATION, mMediaPlayer.getDuration());
                         mMediaPlayer.start();
                         autoUpdaterSeekBar();
                     }
+                    break;
+                }
+                case Constants.SEEK:{
+                    mMediaPlayer.seekTo(msg.arg1);
+                    break;
+                }
+                case Constants.TOGGLE_SEEKBAR_UPDATER:{
+                    autoUpdaterSeekBar();
                     break;
                 }
                 default:
@@ -80,10 +94,20 @@ public class MyMusicService extends Service implements
         }
     }
 
-    public void sendMessageToActivity(int code, int a) {
+    public void sendMessageToActivity(int code) {
         Message msg = Message.obtain(null, code);
         msg.replyTo = mMessenger;
-        msg.arg1 = a;
+        try {
+            mActivity.send(msg);
+        } catch (RemoteException e) {
+            e.printStackTrace();
+        }
+    }
+
+    public void sendMessageToActivity(int code, int extras) {
+        Message msg = Message.obtain(null, code);
+        msg.replyTo = mMessenger;
+        msg.arg1 = extras;
         try {
             mActivity.send(msg);
         } catch (RemoteException e) {
@@ -93,22 +117,23 @@ public class MyMusicService extends Service implements
 
     public void autoUpdaterSeekBar() {
 
-        Message msg = Message.obtain(null, Constants.UPDATE_BAR);
+        Message msg = Message.obtain(null, Constants.UPDATE_TRACK_TIME);
         msg.replyTo = mMessenger;
 
-        Thread updateActivity = new Thread(new Runnable() {
+        Thread updateActivityThread = new Thread(new Runnable() {
             @Override
             public void run() {
                 try {
                     while (mMediaPlayer.isPlaying()) {
-                        sendMessageToActivity(Constants.UPDATE_BAR, mMediaPlayer.getCurrentPosition());
-                        Thread.sleep(1000);
+                        sendMessageToActivity(Constants.UPDATE_TRACK_TIME, mMediaPlayer.getCurrentPosition());
+                        Thread.sleep(300);
                     }
                 } catch (Exception e) {
+                    e.printStackTrace();
                 }
             }
         });
-
+        updateActivityThread.start();
 
     }
 
@@ -123,7 +148,7 @@ public class MyMusicService extends Service implements
 
     @Override
     public void onCompletion(MediaPlayer mp) {
-
+        sendMessageToActivity(Constants.END_OF_TRACK);
     }
 
     @Override

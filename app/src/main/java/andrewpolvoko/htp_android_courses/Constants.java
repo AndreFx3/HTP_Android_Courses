@@ -5,8 +5,10 @@ package andrewpolvoko.htp_android_courses;
  */
 public final  class Constants {
     public final static int TOGGLE_PLAYBACK = 5;
-    public final static int INIT_SEEK_BAR = 6;
-    public final static int UPDATE_BAR = 7;
-    public final static int SET_DURATION = 8;
+    public final static int SET_TRACK_DURATION = 6;
+    public final static int UPDATE_TRACK_TIME = 7;
+    public final static int SEEK = 8;
+    public final static int END_OF_TRACK = 9;
+    public final static int TOGGLE_SEEKBAR_UPDATER = 9;
     public final static String TrackURL = "https://cs9-10v4.vk.me/p18/105a97d24153ca.mp3";
 }
