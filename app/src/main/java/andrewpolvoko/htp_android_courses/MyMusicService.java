@@ -76,7 +76,6 @@ public class MyMusicService extends Service implements
                     } else {
                         sendMessageToActivity(Constants.SET_TRACK_DURATION, mMediaPlayer.getDuration());
                         mMediaPlayer.start();
-                        autoUpdaterSeekBar();
                     }
                     break;
                 }
@@ -84,8 +83,8 @@ public class MyMusicService extends Service implements
                     mMediaPlayer.seekTo(msg.arg1);
                     break;
                 }
-                case Constants.TOGGLE_SEEKBAR_UPDATER:{
-                    autoUpdaterSeekBar();
+                case Constants.GET_TRACK_TIME:{
+                    sendMessageToActivity(Constants.UPDATE_TRACK_TIME, mMediaPlayer.getCurrentPosition());
                     break;
                 }
                 default:
@@ -113,28 +112,6 @@ public class MyMusicService extends Service implements
         } catch (RemoteException e) {
             e.printStackTrace();
         }
-    }
-
-    public void autoUpdaterSeekBar() {
-
-        Message msg = Message.obtain(null, Constants.UPDATE_TRACK_TIME);
-        msg.replyTo = mMessenger;
-
-        Thread updateActivityThread = new Thread(new Runnable() {
-            @Override
-            public void run() {
-                try {
-                    while (mMediaPlayer.isPlaying()) {
-                        sendMessageToActivity(Constants.UPDATE_TRACK_TIME, mMediaPlayer.getCurrentPosition());
-                        Thread.sleep(300);
-                    }
-                } catch (Exception e) {
-                    e.printStackTrace();
-                }
-            }
-        });
-        updateActivityThread.start();
-
     }
 
     @Override

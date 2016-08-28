@@ -62,9 +62,10 @@ public class MainActivity extends AppCompatActivity implements SeekBar.OnSeekBar
             fullTrackTime = savedInstanceState.getInt("fullTrackTime");
             currentTrackTimeView.setText(formatTime(currentTrackTime));
             fullTrackTimeVIew.setText(formatTime(fullTrackTime));
-            //sendMessageToService(Constants.TOGGLE_SEEKBAR_UPDATER); // crushes for unknown reason -_- (bindService() is called before, but mMusicService remains to be null)
-        } else
+        } else {
             startService(new Intent(this, MyMusicService.class));
+        }
+        autoUpdaterSeekBar();
     }
 
     @Override
@@ -153,6 +154,26 @@ public class MainActivity extends AppCompatActivity implements SeekBar.OnSeekBar
             sendMessageToService(Constants.TOGGLE_PLAYBACK);
         } else
             sendMessageToService(Constants.TOGGLE_PLAYBACK);
+    }
+
+    public void autoUpdaterSeekBar() {
+        Thread updateActivityThread = new Thread(new Runnable() {
+            @Override
+            public void run() {
+                while (true) {
+                    try {
+                        if (isMusicPlaying) {
+                            sendMessageToService(Constants.GET_TRACK_TIME);
+                        }
+                        Thread.sleep(200);
+                    } catch (Exception e) {
+                        e.printStackTrace();
+                    }
+                }
+            }
+        });
+        updateActivityThread.start();
+
     }
 
     void bindService() {
