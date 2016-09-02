@@ -3,14 +3,32 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:gravity="center"
     android:paddingBottom="@dimen/activity_vertical_margin"
     android:paddingLeft="@dimen/activity_horizontal_margin"
     android:paddingRight="@dimen/activity_horizontal_margin"
     android:paddingTop="@dimen/activity_vertical_margin"
     tools:context="andrewpolvoko.htp_android_courses.MainActivity">
 
-    <TextView
-        android:layout_width="wrap_content"
+    <RadioGroup
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="Hello World!" />
+        android:gravity="center">
+
+        <RadioButton
+            android:layout_width="match_parent"
+            android:layout_height="48dp"
+            android:button="@drawable/radio_button_selector"
+            android:text="RadioButton 1" />
+
+        <RadioButton
+            android:layout_width="match_parent"
+            android:layout_height="48dp"
+            android:text="RadioButton 2" />
+
+        <RadioButton
+            android:layout_width="match_parent"
+            android:layout_height="48dp"
+            android:text="RadioButton 3" />
+    </RadioGroup>
 </RelativeLayout>
