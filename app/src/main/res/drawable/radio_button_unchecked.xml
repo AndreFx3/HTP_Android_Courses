@@ -1,12 +1,14 @@
 <?xml version="1.0" encoding="utf-8"?>
 <layer-list xmlns:android="http://schemas.android.com/apk/res/android">
-    <item>
+    <item android:left="4.5dp" android:right="4.5dp">
         <shape
-            android:innerRadiusRatio="5"
             android:shape="ring"
-            android:thicknessRatio="35"
+            android:thicknessRatio="10"
             android:useLevel="false">
             <solid android:color="@color/colorPrimary" />
+            <size
+                android:width="23dp"
+                android:height="23dp" />
         </shape>
     </item>
 </layer-list>

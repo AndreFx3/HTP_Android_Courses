@@ -4,23 +4,24 @@
         <shape xmlns:android="http://schemas.android.com/apk/res/android"
             android:innerRadius="0dp"
             android:shape="ring"
-            android:thickness="25dp"
+            android:thickness="5dp"
             android:useLevel="false">
             <solid android:color="@color/colorAccent" />
             <size
-                android:width="200dp"
-                android:height="200dp" />
+                android:width="23dp"
+                android:height="23dp" />
         </shape>
     </item>
 
-    <item>
+    <item android:left="4.5dp" android:right="4.5dp">
         <shape
-            android:innerRadiusRatio="5"
             android:shape="ring"
-            android:thicknessRatio="35"
+            android:thicknessRatio="10"
             android:useLevel="false">
             <solid android:color="@color/colorPrimary" />
-
+            <size
+                android:width="23dp"
+                android:height="23dp" />
         </shape>
     </item>
 </layer-list>
