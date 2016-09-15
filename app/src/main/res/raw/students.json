@@ -1,0 +1,77 @@
+[
+  {
+    "id": 0,
+    "firstName": "Максим",
+    "lastName": "Горбаль"
+  },
+  {
+    "id": 1,
+    "firstName": "Виталий",
+    "lastName": "Кононович"
+  },
+  {
+    "id": 2,
+    "firstName": "Никита",
+    "lastName": "Одинцов"
+  },
+  {
+    "id": 3,
+    "firstName": "Тимофей",
+    "lastName": "Тарашкевич"
+  },
+  {
+    "id": 4,
+    "firstName": "Екатерина",
+    "lastName": "Федорук"
+  },
+  {
+    "id": 5,
+    "firstName": "Анастасия",
+    "lastName": "Мельник"
+  },
+  {
+    "id": 6,
+    "firstName": "Иван",
+    "lastName": "Зоркин"
+  },
+  {
+    "id": 7,
+    "firstName": "Аўгіння",
+    "lastName": "Грахоўская"
+  },
+  {
+    "id": 8,
+    "firstName": "Владимир",
+    "lastName": "Сорокин"
+  },
+  {
+    "id": 9,
+    "firstName": "Дмитрий",
+    "lastName": "Соколовский"
+  },
+  {
+    "id": 10,
+    "firstName": "Кирилл",
+    "lastName": "Дробушевский"
+  },
+  {
+    "id": 11,
+    "firstName": "Антон",
+    "lastName": "Зубченок"
+  },
+  {
+    "id": 12,
+    "firstName": "Александр",
+    "lastName": "Фомин"
+  },
+  {
+    "id": 13,
+    "firstName": "Дмитрий",
+    "lastName": "Звягов"
+  },
+  {
+    "id": 14,
+    "firstName": "Андрей",
+    "lastName": "Половко"
+  }
+]
