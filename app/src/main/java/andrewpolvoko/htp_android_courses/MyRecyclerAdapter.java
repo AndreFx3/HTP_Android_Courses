@@ -8,7 +8,7 @@ import android.widget.TextView;
 
 import java.util.List;
 
-public class MyRecyclerAdapter extends RecyclerView.Adapter<MyRecyclerAdapter.myViewHolder> {
+public class MyRecyclerAdapter extends RecyclerView.Adapter<MyRecyclerAdapter.MyViewHolder> {
     private List<Student> studentsList;
 
     public MyRecyclerAdapter(List<Student> studentsList) {
@@ -16,17 +16,17 @@ public class MyRecyclerAdapter extends RecyclerView.Adapter<MyRecyclerAdapter.my
     }
 
     @Override
-    public MyRecyclerAdapter.myViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
+    public MyViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
         View student = LayoutInflater.from(parent.getContext()).inflate(R.layout.students_list_row, parent, false);
-        return new myViewHolder(student);
+        return new MyViewHolder(student);
     }
 
     @Override
-    public void onBindViewHolder(MyRecyclerAdapter.myViewHolder holder, int position) {
+    public void onBindViewHolder(MyViewHolder holder, int position) {
         Student student = studentsList.get(position);
-        holder.firstName.setText(student.getFirstName());
-        holder.lastName.setText(student.getLastName());
-        holder.letter.setText(student.getFirstName().substring(0, 1));
+        holder.firstName.setText(student.firstName);
+        holder.lastName.setText(student.lastName);
+        holder.letter.setText(student.firstName.substring(0, 1));
     }
 
     @Override
@@ -38,10 +38,10 @@ public class MyRecyclerAdapter extends RecyclerView.Adapter<MyRecyclerAdapter.my
         this.studentsList = studentsList;
     }
 
-    class myViewHolder extends RecyclerView.ViewHolder {
+    static class MyViewHolder extends RecyclerView.ViewHolder {
         public TextView letter, firstName, lastName;
 
-        public myViewHolder(View itemView) {
+        public MyViewHolder(View itemView) {
             super(itemView);
             letter = (TextView) itemView.findViewById(R.id.letterTV);
             firstName = (TextView) itemView.findViewById(R.id.firstNameTV);

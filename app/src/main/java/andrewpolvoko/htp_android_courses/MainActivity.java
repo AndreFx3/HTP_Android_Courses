@@ -12,12 +12,10 @@ import java.util.List;
 
 public class MainActivity extends AppCompatActivity implements LoaderManager.LoaderCallbacks<List<Student>> {
     private List<Student> studentsList = new ArrayList<>();
-    private String TAG;
     private MyRecyclerAdapter adapter;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
-        TAG = this.getPackageName();
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
         RecyclerView myRecyclerView = (RecyclerView) findViewById(R.id.recycler_view);

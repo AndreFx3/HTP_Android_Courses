@@ -13,7 +13,6 @@ import java.io.InputStream;
 import java.io.InputStreamReader;
 import java.util.ArrayList;
 import java.util.Collections;
-import java.util.Comparator;
 import java.util.List;
 
 public class StudentsLoader extends AsyncTaskLoader<List<Student>> {
@@ -36,12 +35,7 @@ public class StudentsLoader extends AsyncTaskLoader<List<Student>> {
         } catch (JSONException e) {
             e.printStackTrace();
         }
-        Collections.sort(studentsList, new Comparator<Student>() {
-            @Override
-            public int compare(Student lhs, Student rhs) {
-                return lhs.getFirstName().compareToIgnoreCase(rhs.getFirstName());
-            }
-        });
+        Collections.sort(studentsList);
         return studentsList;
     }
 

@@ -1,9 +1,9 @@
 package andrewpolvoko.htp_android_courses;
 
-public class Student {
-    private String id;
-    private String firstName;
-    private String lastName;
+public class Student implements Comparable {
+    String id;
+    String firstName;
+    String lastName;
 
     public Student(String id, String firstName, String lastName) {
         this.id = id;
@@ -11,27 +11,11 @@ public class Student {
         this.lastName = lastName;
     }
 
-    public String getId() {
-        return id;
-    }
-
-    public void setId(String id) {
-        this.id = id;
-    }
-
-    public String getFirstName() {
-        return firstName;
-    }
-
-    public void setFirstName(String firstName) {
-        this.firstName = firstName;
-    }
-
-    public String getLastName() {
-        return lastName;
-    }
-
-    public void setLastName(String lastName) {
-        this.lastName = lastName;
+    @Override
+    public int compareTo(Object another) {
+        if (another instanceof Student) {
+            return firstName.compareToIgnoreCase(((Student) another).firstName);
+        } else
+            return -1;
     }
 }
