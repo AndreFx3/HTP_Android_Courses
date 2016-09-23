@@ -4,48 +4,65 @@ import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ImageView;
 import android.widget.TextView;
 
-import java.util.List;
+import com.bumptech.glide.Glide;
 
-public class MyRecyclerAdapter extends RecyclerView.Adapter<MyRecyclerAdapter.MyViewHolder> {
-    private List<Student> studentsList;
+import java.util.ArrayList;
 
-    public MyRecyclerAdapter(List<Student> studentsList) {
-        this.studentsList = studentsList;
+public class MyRecyclerAdapter extends RecyclerView.Adapter<MyRecyclerAdapter.RssItemViewHolder> {
+
+    private final ArrayList<NewsItem> mData = new ArrayList<>();
+
+
+    @Override
+    public RssItemViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
+        return new RssItemViewHolder(LayoutInflater.from(parent.getContext()).inflate(R.layout.news_item, parent, false));
     }
 
     @Override
-    public MyViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
-        View student = LayoutInflater.from(parent.getContext()).inflate(R.layout.students_list_row, parent, false);
-        return new MyViewHolder(student);
+    public void onBindViewHolder(RssItemViewHolder holder, int position) {
+
+        NewsItem newsItem = mData.get(position);
+        holder.title.setText(newsItem.title);
+        holder.description.setText(newsItem.description);
+        Glide.with(holder.imageView.getContext()).load(newsItem.imageLink).into(holder.imageView);
+
     }
 
-    @Override
-    public void onBindViewHolder(MyViewHolder holder, int position) {
-        Student student = studentsList.get(position);
-        holder.firstName.setText(student.firstName);
-        holder.lastName.setText(student.lastName);
-        holder.letter.setText(student.firstName.substring(0, 1));
+    public NewsItem getItem(int position) {
+        return mData.get(position);
     }
 
     @Override
     public int getItemCount() {
-        return studentsList.size();
+        return mData.size();
     }
 
-    public void setStudentsList(List<Student> studentsList) {
-        this.studentsList = studentsList;
-    }
-
-    static class MyViewHolder extends RecyclerView.ViewHolder {
-        public TextView letter, firstName, lastName;
-
-        public MyViewHolder(View itemView) {
-            super(itemView);
-            letter = (TextView) itemView.findViewById(R.id.letterTV);
-            firstName = (TextView) itemView.findViewById(R.id.firstNameTV);
-            lastName = (TextView) itemView.findViewById(R.id.lastNameTV);
+    public void setData(ArrayList<NewsItem> data) {
+        if (data != null) {
+            mData.clear();
+            mData.addAll(data);
+            notifyDataSetChanged();
         }
     }
+
+    public static class RssItemViewHolder extends RecyclerView.ViewHolder {
+        final TextView title;
+        final TextView description;
+        final ImageView imageView;
+
+        public RssItemViewHolder(View itemView) {
+            super(itemView);
+
+            title = (TextView) itemView.findViewById(R.id.title);
+            description = (TextView) itemView.findViewById(R.id.description);
+            imageView = (ImageView) itemView.findViewById(R.id.imageView);
+
+        }
+
+    }
+
+
 }
