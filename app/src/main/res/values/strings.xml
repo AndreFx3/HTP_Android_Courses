@@ -1,7 +1,3 @@
 <resources>
-    <string name="app_name">HTP_Android_Courses</string>
-    <string name="people">Люди</string>
-    <string name="auto">Авто</string>
-    <string name="tech">Технологии</string>
-    <string name="realt">Недвижимость</string>
+    <string name="app_name">HomeWork10_ContentProvider</string>
 </resources>
