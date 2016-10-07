@@ -81,13 +81,21 @@ public class MyMainFragment extends Fragment implements LoaderManager.LoaderCall
 
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
-        if (item.getItemId() == R.id.add) {
-            getActivity().getSupportFragmentManager().beginTransaction()
-                    .setCustomAnimations(R.anim.enter_from_right, R.anim.exit_to_left, R.anim.enter_from_left, R.anim.exit_to_right)
-                    .replace(R.id.fragment_container, new MyCreatePersonFragment())
-                    .addToBackStack(null)
-                    .commit();
-            return true;
+        switch (item.getItemId()) {
+            case R.id.add:
+                getActivity().getSupportFragmentManager().beginTransaction()
+                        .setCustomAnimations(R.anim.enter_from_right, R.anim.exit_to_left, R.anim.enter_from_left, R.anim.exit_to_right)
+                        .replace(R.id.fragment_container, new MyCreatePersonFragment())
+                        .addToBackStack(null)
+                        .commit();
+                return true;
+            case R.id.openButtonsFragment:
+                getActivity().getSupportFragmentManager().beginTransaction()
+                        .setCustomAnimations(R.anim.enter_from_right, R.anim.exit_to_left, R.anim.enter_from_left, R.anim.exit_to_right)
+                        .replace(R.id.fragment_container, new MyButtonsFragment())
+                        .addToBackStack(null)
+                        .commit();
+                return true;
         }
         return super.onOptionsItemSelected(item);
     }

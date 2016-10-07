@@ -7,4 +7,9 @@
         android:icon="@android:drawable/ic_menu_add"
         android:title="Add"
         app:showAsAction="always" />
+    <item
+        android:id="@+id/openButtonsFragment"
+        android:icon="@android:drawable/ic_dialog_dialer"
+        android:title="Buttons"
+        app:showAsAction="always" />
 </menu>
