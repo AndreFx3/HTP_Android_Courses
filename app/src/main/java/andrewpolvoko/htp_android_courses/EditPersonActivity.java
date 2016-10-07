@@ -64,4 +64,10 @@ public class EditPersonActivity extends AppCompatActivity implements View.OnClic
         getContentResolver().update(personUri, person, null, null);
         finish();
     }
+
+    @Override
+    public void onBackPressed() {
+        super.onBackPressed();
+        this.overridePendingTransition(android.R.anim.fade_in, android.R.anim.fade_out);
+    }
 }

@@ -1,9 +1,13 @@
 package andrewpolvoko.htp_android_courses;
 
+import android.animation.ObjectAnimator;
+import android.app.Activity;
 import android.content.Intent;
 import android.database.Cursor;
 import android.os.Bundle;
+import android.support.v4.app.ActivityOptionsCompat;
 import android.support.v4.app.LoaderManager;
+import android.support.v4.app.NotificationManagerCompat;
 import android.support.v4.content.CursorLoader;
 import android.support.v4.content.Loader;
 import android.support.v7.app.AppCompatActivity;
@@ -34,6 +38,9 @@ public class MainActivity extends AppCompatActivity implements LoaderManager.Loa
         getSupportLoaderManager().initLoader(0, null, this);
         getClass();
         RecyclerItemClickSupport.addTo(mRecyclerView).setOnItemClickListener(this);
+
+
+
     }
 
     @Override
@@ -57,6 +64,7 @@ public class MainActivity extends AppCompatActivity implements LoaderManager.Loa
         Intent intent = new Intent(this, EditPersonActivity.class);
         intent.putExtra("id", mAdapter.getItemId(position));
         startActivity(intent);
+        this.overridePendingTransition(R.anim.my_custom_animation, android.R.anim.fade_out);
     }
 
     @Override
