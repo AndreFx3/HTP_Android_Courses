@@ -64,10 +64,13 @@ public class MyMainFragment extends Fragment implements LoaderManager.LoaderCall
 
         MyEditPersonFragment fragment = new MyEditPersonFragment();
         fragment.setArguments(bundle);
+
         getActivity().getSupportFragmentManager().beginTransaction()
+                .setCustomAnimations(R.anim.enter_from_right, R.anim.exit_to_left, R.anim.enter_from_left, R.anim.exit_to_right)
                 .replace(R.id.fragment_container, fragment)
                 .addToBackStack(null)
-                .commit();
+                .commit()
+        ;
     }
 
     @Override
@@ -80,6 +83,7 @@ public class MyMainFragment extends Fragment implements LoaderManager.LoaderCall
     public boolean onOptionsItemSelected(MenuItem item) {
         if (item.getItemId() == R.id.add) {
             getActivity().getSupportFragmentManager().beginTransaction()
+                    .setCustomAnimations(R.anim.enter_from_right, R.anim.exit_to_left, R.anim.enter_from_left, R.anim.exit_to_right)
                     .replace(R.id.fragment_container, new MyCreatePersonFragment())
                     .addToBackStack(null)
                     .commit();
@@ -87,4 +91,6 @@ public class MyMainFragment extends Fragment implements LoaderManager.LoaderCall
         }
         return super.onOptionsItemSelected(item);
     }
+
+
 }
