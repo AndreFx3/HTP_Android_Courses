@@ -23,8 +23,6 @@
             android:authorities="${applicationId}.sqlprovider"
             android:exported="false" />
 
-        <activity android:name=".CreatePersonActivity"></activity>
-        <activity android:name=".EditPersonActivity"></activity>
     </application>
 
 </manifest>
